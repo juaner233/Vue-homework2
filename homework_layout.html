@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切换展示</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            width: 375px;
+            margin: 20px auto 0;
+        }
+
+        .banner {
+            width: 100%;
+            background-color: lightblue;
+            text-align: right;
+            padding: 5px 10px;
+            box-sizing: border-box;
+
+        }
+
+        .banner > div {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            text-align: center;
+            opacity: .85;
+            cursor: pointer;
+        }
+
+        .banner img {
+            width: 12px;
+        }
+
+        .grid {
+            background-color: pink;
+            margin-right: 5px;
+        }
+
+        .grid1 {
+            margin-right: 5px;
+            background-color: hotpink;
+        }
+
+        .list {
+            background-color: pink;
+        }
+
+        .list1 {
+            background-color: hotpink;
+        }
+
+        /**/
+        .content {
+            width: 100%;
+            padding: 20px 5px 0 10px;
+            box-sizing: border-box;
+        }
+
+        .box {
+            display: inline-block;
+            width: 174px;
+            margin-right: 5px;
+
+        }
+
+        .box1 {
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            padding: 5px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .imgs {
+            width: 174px;
+            height: 174px;
+        }
+
+        .imgs1 {
+            float: left;
+            width: 75px;
+            height: 75px
+        }
+
+        .linkto {
+            display: none;
+        }
+
+        .linkto1 {
+            margin-left: 5px;
+            width: 75%;
+            font-size: 12px;
+            color: gray;
+            float: left;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="banner">
+        <div :class="{grid:iswell,grid1:isok}" @click="change1">
+            <img class="img1" :src="switchimg.img1">
+        </div>
+        <div :class="{list:isok,list1:iswell}" @click="change">
+            <img class="img2" :src="switchimg.img2">
+        </div>
+    </div>
+    <div class="content">
+        <!--每一个小DIV-->
+        <a :class="{box:isok,box1:iswell}" v-for="arr in showarr" :href="arr.url">
+            <img :class="{imgs:isok,imgs1:iswell}" :src="arr.image">
+            <p :class="{linkto:isok,linkto1:iswell}">{{arr.title}}</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            iswell: false,
+            isok: true,
+
+            switchimg: {
+                img1: 'img/grade.png',
+                img2: 'img/list.png'
+            },
+
+            showarr: [{
+                "title": "What You Need To Know About CSS Variables",
+                "url": "http://tutorialzine.com/2016/03/what-you-need-to-know-about-css-variables/",
+                "image": 'https://tutorialzine.com/media/2016/03/css-variables.jpg'
+            },
+                {
+                    "title": "Freebie: 4 Great Looking Pricing Tables",
+                    "url": "http://tutorialzine.com/2016/02/freebie-4-great-looking-pricing-tables/",
+                    "image": 'https://tutorialzine.com/media/2016/02/great-looking-pricing-tables.jpg'
+                },
+                {
+                    "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
+                    "url": "http://tutorialzine.com/2016/02/20-interesting-javascript-and-css-libraries-for-february-2016/",
+                    "image": 'https://tutorialzine.com/media/2016/02/interesting-resources-february.jpg'
+                },
+                {
+                    "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
+                    "url": "http://tutorialzine.com/2016/02/quick-tip-easiest-way-to-make-responsive-headers/",
+                    "image": 'https://tutorialzine.com/media/2016/02/quick-tip-responsive-headers.png'
+                },
+                {
+                    "title": "Learn SQL In 20 Minutes",
+                    "url": "http://tutorialzine.com/2016/01/learn-sql-in-20-minutes/",
+                    "image": 'https://tutorialzine.com/media/2016/01/learn-sql-20-minutes.png'
+                },
+                {
+                    "title": "Creating Your First Desktop App With HTML, JS and Electron",
+                    "url": "http://tutorialzine.com/2015/12/creating-your-first-desktop-app-with-html-js-and-electron/",
+                    "image": 'https://tutorialzine.com/media/2015/12/creating-your-first-desktop-app-with-electron.png'
+                }]
+        },
+        methods: {
+            change: function () {
+                this.iswell = true
+                this.isok = false
+                console.log(this.iswell)
+            },
+            change1: function () {
+                this.iswell = false
+                this.isok = true
+                console.log(this.iswell)
+            }
+        }
+    })
+</script>
+</html>
